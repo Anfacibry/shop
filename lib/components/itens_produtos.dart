@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shop/models/produtos.dart';
+import 'package:shop/utils/rotas.dart';
 
 class ItensProdutos extends StatelessWidget {
   final Produtos produto;
@@ -14,9 +15,18 @@ class ItensProdutos extends StatelessWidget {
         bottomLeft: Radius.circular(20),
       ),
       child: GridTile(
-          child: Image.network(
-            produto.imageUrl!,
-            fit: BoxFit.cover,
+          child: InkWell(
+            child: Image.network(
+              produto.imageUrl!,
+              fit: BoxFit.cover,
+            ),
+            onTap: () {
+              Navigator.pushNamed(
+                context,
+                AppRotas.totasDadosProdutos,
+                arguments: produto,
+              );
+            },
           ),
           footer: GridTileBar(
             backgroundColor: Colors.black45,
@@ -27,10 +37,12 @@ class ItensProdutos extends StatelessWidget {
             leading: IconButton(
               onPressed: () {},
               icon: const Icon(Icons.favorite),
+              color: Theme.of(context).colorScheme.secondary,
             ),
             trailing: IconButton(
               onPressed: () {},
               icon: const Icon(Icons.shopping_cart),
+              color: Theme.of(context).colorScheme.secondary,
             ),
           )),
     );
